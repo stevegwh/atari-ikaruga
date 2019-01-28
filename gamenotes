@@ -1,0 +1,10 @@
+Enemy patterns
+--------------
+Have slow moving enemies that stop and shot out a ring of bullets then leave the screen
+Two columns of enemy either side of the screen shooting homing bullets at you
+Start a pattern off and then make it home in on the player's position. 
+
+
+General notes
+-------------
+You don't always need a lot of bullets on the screen, barrages of enemies are common

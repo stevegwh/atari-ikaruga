@@ -1,0 +1,40 @@
+EASY
+--------------
+Draw score etc on the panel
+Linear shot that slows down (but limit end point so it doesnt reverse)
+Make lines of shots (super easy)
+Make homing shots point towards direction
+Make more EnemyFactory patterns
+Make RegularMobs have the possibility to shoot
+Move all sprites over to Taisei sprites to avoid getting sued
+
+
+DIFFICULT
+--------------
+Currently hit detection is only for circles, what if you want to implement different shapes?
+times to do a pattern?
+Watch more Shiffman videos etc to find more cool mathematical shapes to put in
+Revise what the hell "k" etc means in a spiral
+Find out how to do a "whip" style pattern
+Homing bullets are still fucked
+
+FOR LATER
+-------------
+checkBounds mixin takes the entire bullet object as an argument. It'd be much better to specifically pass in its dimensions and its position (which is only what you need to check)
+also you could make checkBounds part of the Game class. It makes little sense to use it for Player
+
+DONE
+--------------
+Make RegularMob movement patterns and implement them on initialization
+Make a shot go to a certain position (tween) and then explode into a ring
+Resize window to be more like touhou
+Make a general shot class and put the subclasses (SimpleSideShot etc) into their own files under a shots folder.. you're going to be making a lot of thes e
+Linear shot that targets player position
+Make enemies come up from behind
+Do a perfect ring with gaps in it
+Sort out variabe names for patterns, what does "amount" mean? The amount of bullets? The max number of
+Make focus mode focus all your bullets on one direction
+
+NOTES
+----------
+
