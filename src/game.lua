@@ -1,5 +1,4 @@
 require 'src.level'
-local Power = require 'src.powerup'
 local Game = class('Game')
 --mixins
 Game:include(UpdateTable)
@@ -20,13 +19,19 @@ function Game:initialize()
   --sounds
   self.bgm = love.audio.newSource('assets/bgm/bgm.mp3', 'stream')
   --enemy
-  self.powerup = love.graphics.newImage('assets/sprites/spread.png')
 end
 
 function Game:playMusic()
   -- love.audio.play(self.bgm)
 end
 
+function Game:drawPurpleTimer()
+  local r,g,b,a = love.graphics.getColor()
+  love.graphics.setColor(1,0,1,0.3)
+  local i = GAME_WIDTH / player.purpleTimerLimit
+  love.graphics.rectangle('fill', 0, 0, GAME_WIDTH - player.purpleTimer * i, GAME_HEIGHT)
+  love.graphics.setColor(r,g,b,a)
+end
 
 function Game:draw()
   love.graphics.draw(self.bg)
@@ -37,6 +42,9 @@ function Game:draw()
     self:drawTable(self.explosions)
     self:drawTable(self.enemies)
   end)
+  if player.mode == "purple" then
+    self:drawPurpleTimer()
+  end
 end
 
 function Game:update(dt)   --player is updated separately

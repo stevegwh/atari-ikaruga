@@ -2,7 +2,6 @@ local Bullet = require 'src.bullets.player.baseclass'
 
 local PrimaryBullet = class('Primary', Bullet)
 function PrimaryBullet:initialize(x, y, vx, vy, mode)
-  local mode = 'primary'
   -- local sprite = love.graphics.newQuad(64, 224, 32, 32, game.bullet_sprites:getWidth(),
   --                                      game.bullet_sprites:getHeight())
   -- local sprite = love.graphics.newQuad(416, 320, 32, 32, game.bullet_sprites:getWidth(),

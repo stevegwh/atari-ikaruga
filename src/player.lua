@@ -10,14 +10,14 @@ Player:include(DebugDraw)
 
 function Player:initialize()
   --score stuff
-  self.red = 0
-  self.blue = 0
+  self.red = 10
+  self.blue = 10
   self.score = 0
   self.lives = 3
   self.alive = true
   self.focus = false
   self.angle = 0
-  self.mode = 'red'
+  self.mode = 'purple'
   --items
   self.bullets = {}
   --vectors
@@ -33,7 +33,9 @@ function Player:initialize()
   self.sprite = love.graphics.newImage('assets/sprites/player_spritesheet.png')
   self.focus_sprite = love.graphics.newImage('assets/sprites/focus.png')
   --timers
-  self.primaryBulletTimer = 0
+  self.purpleTimer = 0
+  self.purpleTimerLimit = 5
+  self.bulletTimer = 0
   self.deathTimer = 0
   --animation
   self.current_animation = "broll"
@@ -54,7 +56,11 @@ end
 
 function Player:powerupCollect(mode)
   self[mode] = self[mode] + 1
-  self.score = self.score + 1000
+  local score = 1000
+  if self.mode == "purple" then
+    score = score + 1000
+  end
+  self.score = score
 end
 
 function Player:fireSound()
@@ -66,11 +72,11 @@ end
 
 function Player:fire(dt)
   local playerCenter = self.pos.x + (self.w*self.sprite_scale)/2
-  if self.primaryBulletTimer > 0.05 then
+  if self.bulletTimer > 0.05 then
     self:fireSound()
     table.insert(self.bullets, PrimaryBullet:new(playerCenter - 80, self.pos.y - self.h/2, 0, -5, self.mode))
     table.insert(self.bullets, PrimaryBullet:new(playerCenter - 48, self.pos.y - self.h/2, 0, -5, self.mode))
-    self.primaryBulletTimer = 0
+    self.bulletTimer = 0
   end
 end
 
@@ -129,7 +135,6 @@ function Player:die()
   self.alive = false
 end
 
-
 function Player:checkState(dt)
   if not self.alive and self.deathTimer < 2 then
     self.deathTimer = dt + self.deathTimer
@@ -137,8 +142,17 @@ function Player:checkState(dt)
     self.alive = true
     self.deathTimer = 0
   end
-end
 
+  if self.red + self.blue > 10 and self.purpleTimer < self.purpleTimerLimit then
+    self.mode = "purple"
+    self.purpleTimer = self.purpleTimer + dt
+  elseif self.red + self.blue > 10 and self.purpleTimer > 5 then
+    self.mode = "red"
+    self.red = 0
+    self.blue = 0
+    self.purpleTimer = 0
+  end
+end
 
 local getDist = function(a, b)
   local dx = b.x - a.x
@@ -189,7 +203,6 @@ end
 function Player:draw()
   local r,g,b,a = love.graphics.getColor()
   love.graphics.setColor(self:setMode())
-  -- love.graphics.draw(self.sprite, self.pos.x, self.pos.y, 0, self.sprite_scale, self.sprite_scale)
   love.graphics.draw(self.focus_sprite, self.hitbox.x, self.hitbox.y + 5, -self.angle, 1.2, 1.2, self.focus_sprite:getWidth() / 2, self.focus_sprite:getHeight() / 2)
   self.animations[self.current_animation]:draw(self.sprite, self.pos.x, self.pos.y, 0, self.sprite_scale, self.sprite_scale)
   love.graphics.setColor(r,g,b,a)
@@ -209,14 +222,10 @@ function Player:update(dt)
   self:checkState(dt)
   self:listenForMove(dt)
   self.animations[self.current_animation]:update(dt)
-  self.primaryBulletTimer = self.primaryBulletTimer + dt
-  self.secondaryBulletTimer = self.secondaryBulletTimer + dt
+  self.bulletTimer = self.bulletTimer + dt
   self:updateHitbox()
   self.angle = self.angle + dt * math.pi/2
   self.angle = self.angle % (2*math.pi)
-  if self.red + self.blue > 10 then
-    self.mode = "purple"
-  end
 end
 
 return Player
