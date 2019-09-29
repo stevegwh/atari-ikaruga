@@ -22,3 +22,15 @@ Once both the blue and red gauges have been filled you become purple for a limit
 
 
 Controls: Move-> WSAD, Fire -> Space, Change color: Q.
+
+
+How to install:
+
+Clone repo
+
+Install love2d from: https://love2d.org/
+
+On linux: love atari-ikaruga
+
+
+Uncomment lines from leveldata in order to showcase more enemies.
