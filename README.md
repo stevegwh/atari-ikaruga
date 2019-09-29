@@ -30,7 +30,7 @@ Clone repo
 
 Install love2d from: https://love2d.org/
 
-On linux: love atari-ikaruga
+On linux: love <path to atari-ikaruga>
 
 
 Uncomment lines from leveldata in order to showcase more enemies.
