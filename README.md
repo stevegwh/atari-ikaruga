@@ -2,6 +2,10 @@
 "Atari Ikaruga" (Name WIP
 Small (unfinished) game written in Lua using Love2d (and many libraries).
 
+<img src="./game.gif" 
+
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 
 Concept: 
 
