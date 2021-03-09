@@ -1,5 +1,7 @@
 # atari-ikaruga
-"Atari Ikaruga" (Name WIP
+"Atari Ikaruga" (Name WIP)
+
+
 Small (unfinished) game written in Lua using Love2d (and many libraries).
 
 ![alt text](https://github.com/wheelsofsteel/atari-ikaruga/raw/master/game.gif "GIF of game")
